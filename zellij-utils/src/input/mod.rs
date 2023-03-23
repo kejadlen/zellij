@@ -61,8 +61,10 @@ mod not_wasm {
         let modifiers = event.modifiers;
 
         // *** THIS IS WHERE WE SHOULD WORK AROUND ISSUES WITH TERMWIZ ***
-        if raw_bytes == [8] {
-            return Key::Ctrl('h');
+        match raw_bytes {
+            [8] => return Key::Ctrl('h'),
+            [10] => return Key::Ctrl('j'),
+            _ => {},
         };
 
         match event.key {
